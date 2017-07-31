@@ -1,12 +1,51 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Project #8: FCCIntermediate Twitch.tv API</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<meta charset="UTF-8">
+	<title>Project #8: FCCIntermediate Twitch.tv API</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
+	<br><br>
+	<div class="container">
+	<div class="panel panel-primary">
+		<div class="panel-heading"><h3>Twitch Channels</h3></div>
+			<div class="panel-body">
+				<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1">Online</a></li>
+						<li><a href="#tabs-2">Offline</a></li>
+						<li><a href="#tabs-3">All</a></li>
+					</ul>
+					<div id="tabs-1">
+						<div class="panel panel-default">
+							<div class="panel-body"><b>online</b> <a href="#"><button type="button" class="btn btn-primary">Online Placeholder</button></a></div>
+						</div>
+					</div>
+					<div id="tabs-2">
+						<div class="panel panel-default">
+							<div class="panel-body"><b>offline</b> <a href="#"><button type="button" class="btn btn-primary">Offline Placeholder</button></a></div>
+						</div>
+					</div>
+					<div id="tabs-3">
+						<div class="panel panel-default">
+							<div class="panel-body"><b>offline</b> <a href="#"><button type="button" class="btn btn-primary">All Placeholder</button></a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
+<footer>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+	<script src="script.js"></script>
+	<!-- <hr style="width: 70%">
+	<div style="font-family: monospace; text-align: center"><a href="http://intracitygeeks.org/">CareerDevs</a> of Providence, RI</div> -->
+</footer>
 </html>
