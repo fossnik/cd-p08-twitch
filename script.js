@@ -1,7 +1,6 @@
 function eachUser(users) {
 	$.each(users, function(index, user) {
 		doAJAXuser(user);
-		userOnline(user);
 	});
 };
 
@@ -10,35 +9,47 @@ function doAJAXuser(user) {
 		dataType: 'json',
 		url: '//wind-bow.gomix.me/twitch-api/users/' + user + '?callback=?',
 		success: function(responseData) {
-			usersOutput({
-				id: responseData._id,
-				display_name: responseData.display_name,
-				logo: responseData.logo,
-				link: responseData._links.self
-			}); // usersOutput
+			console.log("Users: Query Successful");
 		} // success
-	}); // ajax
+	}) // ajax outer
+	.done(function(responseDataUsers) {
+		var usersOutput = {
+			id: responseDataUsers._id,
+			display_name: responseDataUsers.display_name,
+			logo: responseDataUsers.logo,
+			link: responseDataUsers._links.self
+		}; // usersOutput
+		$.ajax({
+			dataType: 'json',
+			url: '//wind-bow.gomix.me/twitch-api/streams/' + user + '?callback=?',
+			success: function(responseDataStreams) {
+				console.log("Streams: Query Successful");
+			} // success
+		}) // ajax inner
+		.done(function(responseDataStreams) {
+			var streamsOutput = responseDataStreams.stream
+			// console.log(streamsOutput);
+			// console.log(usersOutput);
+			doHTML(streamsOutput,usersOutput);
+		}); // ajax inner .done
+	}); // ajax outer .done
 };
 
-function userOnline(user) {
-	$.ajax({
-		dataType: 'json',
-		url: '//wind-bow.gomix.me/twitch-api/streams/' + user + '?callback=?',
-		success: function(responseData) {
-			if(responseData.stream === null) {
-				console.log(user + ": No Active Streams");
-			} else {
-				console.log(user + ": Steaming!");
-			};
-		} // success
-	}); // ajax
-};
-
-function usersOutput(idNameLogoLink) {
-	console.log(idNameLogoLink.logo);
-	// $('#userOnline').append(idNameLogoLink.display_name + "\n");
-	$('#userOnline').append("<img class='img-thumbnail img-circle img-responsive' src=" + idNameLogoLink.logo + ">\n");
-};
+function doHTML(streams,users) {
+	console.log(streams,users);
+}
+				// usersOutput += {streaming: responseData.stream === null};
+				// if(responseData.stream === null) {
+				// 	console.log(user + ": No Active Streams");
+				// } else {
+				// 	console.log(user + ": Steaming!");
+				// };
+// };
+// function usersOutput(idNameLogoLink) {
+// 	console.log(idNameLogoLink.logo);
+// 	// $('#userOnline').append(idNameLogoLink.display_name + "\n");
+// 	$('#userOnline').append("<img class='img-thumbnail img-circle img-responsive' src=" + idNameLogoLink.logo + ">\n");
+// };
 
 $(document).ready(function() {
 	$( "#tabs" ).tabs();
