@@ -29,8 +29,7 @@ function doHTML(kData) {
 	var htmlFace = "<div class='flexbox-item'>";
 				htmlFace += "<a href="+"'"+"//www.twitch.tv/"+kData.name+"'>";
 					htmlFace += "<img class='img-thumbnail img-circle' src=" + "'"+kData.logo+"'" + "</img>";
-					htmlFace += "<button type='button' class='btn btn-primary'>"+kData.name;
-					htmlFace += "</button>";
+					htmlFace += "<button type='button' class='btn btn-primary'>"+kData.name+"</button>";
 				htmlFace += "</a>"
 			htmlFace += "</div>";
 
@@ -49,5 +48,5 @@ function doHTML(kData) {
 
 $(document).ready(function() {
 	$( "#tabs" ).tabs();
-	eachUser(["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "habathcx", "RobotCaleb"]);
+	eachUser(["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "habathcx", "RobotCaleb", "noobs2ninjas"]);
 });
