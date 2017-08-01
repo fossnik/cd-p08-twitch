@@ -36,10 +36,12 @@ function userOnline(user) {
 
 function usersOutput(idNameLogoLink) {
 	console.log(idNameLogoLink.logo);
-	$('#tabs-1').html(idNameLogoLink.id + "\n" + idNameLogoLink.display_name);
+	// $('#userOnline').append(idNameLogoLink.display_name + "\n");
+	$('#userOnline').append("<img class='img-thumbnail img-circle img-responsive' src=" + idNameLogoLink.logo + ">\n");
 };
 
 $(document).ready(function() {
 	$( "#tabs" ).tabs();
-	eachUser(["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"]);
+	eachUser(["ESL_SC2", "OgamingSC2", "cretetion"]);
+	// eachUser(["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"]);
 });
