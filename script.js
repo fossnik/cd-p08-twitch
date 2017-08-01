@@ -36,20 +36,14 @@ function doAJAXuser(user) {
 };
 
 function doHTML(streams,users) {
-	console.log(streams,users);
-}
-				// usersOutput += {streaming: responseData.stream === null};
-				// if(responseData.stream === null) {
-				// 	console.log(user + ": No Active Streams");
-				// } else {
-				// 	console.log(user + ": Steaming!");
-				// };
-// };
-// function usersOutput(idNameLogoLink) {
-// 	console.log(idNameLogoLink.logo);
-// 	// $('#userOnline').append(idNameLogoLink.display_name + "\n");
-// 	$('#userOnline').append("<img class='img-thumbnail img-circle img-responsive' src=" + idNameLogoLink.logo + ">\n");
-// };
+	if(streams === null) {
+		$('#userOffline').append("<img class='img-thumbnail img-circle img-responsive' src=" + users.logo + ">\n");
+	} else {
+		$('#userOnline').append("<img class='img-thumbnail img-circle img-responsive' src=" + users.logo + ">\n");
+	};
+
+	$('#allUser').append("<img class='img-thumbnail img-circle img-responsive' src=" + users.logo + ">\n");
+};
 
 $(document).ready(function() {
 	$( "#tabs" ).tabs();
