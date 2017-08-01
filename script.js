@@ -1,52 +1,44 @@
 function eachUser(users) {
 	$.each(users, function(index, user) {
-		doAJAXuser(user);
+		doAJAX(user);
 	});
 };
 
-function doAJAXuser(user) {
+function doAJAX(user) {
 	$.ajax({
 		dataType: 'json',
 		url: '//wind-bow.gomix.me/twitch-api/users/' + user + '?callback=?',
-		success: function(responseData) {
-			console.log("Users: Query Successful");
-		} // success
+		success: function() {	console.log("Users: Query Successful");	}
 	}) // ajax outer
-	.done(function(responseDataUsers) {
-		var usersOutput = {
-			id: responseDataUsers._id,
-			display_name: responseDataUsers.display_name,
-			logo: responseDataUsers.logo,
-			link: responseDataUsers._links.self
-		}; // usersOutput
+	.done(function(kypeUser) {
 		$.ajax({
 			dataType: 'json',
 			url: '//wind-bow.gomix.me/twitch-api/streams/' + user + '?callback=?',
-			success: function(responseDataStreams) {
-				console.log("Streams: Query Successful");
-			} // success
+			success: function() { console.log("Streams: Query Successful"); }
 		}) // ajax inner
-		.done(function(responseDataStreams) {
-			var streamsOutput = responseDataStreams.stream
-			// console.log(streamsOutput);
-			// console.log(usersOutput);
-			doHTML(streamsOutput,usersOutput);
+		.done(function(kypeStream) {
+			var userData = {
+				id: kypeUser._id,
+				display_name: kypeUser.display_name,
+				logo: kypeUser.logo,
+				link: kypeUser._links.self
+			}; // usersOutput
+			var streamData = kypeStream.stream;
+			doHTML(userData, streamData);
 		}); // ajax inner .done
 	}); // ajax outer .done
 };
 
-function doHTML(streams,users) {
+function doHTML(users, streams) {
 	if(streams === null) {
 		$('#userOffline').append("<img class='img-thumbnail img-circle img-responsive' src=" + users.logo + ">\n");
 	} else {
 		$('#userOnline').append("<img class='img-thumbnail img-circle img-responsive' src=" + users.logo + ">\n");
 	};
-
 	$('#allUser').append("<img class='img-thumbnail img-circle img-responsive' src=" + users.logo + ">\n");
 };
 
 $(document).ready(function() {
 	$( "#tabs" ).tabs();
-	eachUser(["ESL_SC2", "OgamingSC2", "cretetion"]);
-	// eachUser(["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"]);
+	eachUser(["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "habathcx", "RobotCaleb"]);
 });
