@@ -8,35 +8,44 @@ function doAJAX(user) {
 	$.ajax({
 		dataType: 'json',
 		url: '//wind-bow.gomix.me/twitch-api/users/' + user + '?callback=?',
-		success: function() {	console.log("Users: Query Successful");	}
 	}) // ajax outer
 	.done(function(kypeUser) {
 		$.ajax({
 			dataType: 'json',
 			url: '//wind-bow.gomix.me/twitch-api/streams/' + user + '?callback=?',
-			success: function() { console.log("Streams: Query Successful"); }
 		}) // ajax inner
 		.done(function(kypeStream) {
-			var userData = {
-				id: kypeUser._id,
-				display_name: kypeUser.display_name,
+			var nls = {
+				name: kypeUser.display_name,
 				logo: kypeUser.logo,
-				link: kypeUser._links.self
-			}; // usersOutput
-			var streamData = kypeStream.stream;
-			doHTML(userData, streamData);
+				stream: kypeStream.stream,
+			};
+			doHTML(nls);
 		}); // ajax inner .done
 	}); // ajax outer .done
-};
+}; // doAJAX function
 
-function doHTML(users, streams) {
-	if(streams === null) {
-		$('#userOffline').append("<img class='img-thumbnail img-circle img-responsive' src=" + users.logo + ">\n");
+function doHTML(kData) {
+	var htmlFace = "<div class='flexbox-item'>";
+				htmlFace += "<a href="+"'"+"//www.twitch.tv/"+kData.name+"'>";
+					htmlFace += "<img class='img-thumbnail img-circle' src=" + "'"+kData.logo+"'" + "</img>";
+					htmlFace += "<button type='button' class='btn btn-primary'>"+kData.name;
+					htmlFace += "</button>";
+				htmlFace += "</a>"
+			htmlFace += "</div>";
+
+	if(kData.stream === null) {
+		var stateNode = '#userOffline';
+		htmlFace = htmlFace.replace(" btn-primary","");
 	} else {
-		$('#userOnline').append("<img class='img-thumbnail img-circle img-responsive' src=" + users.logo + ">\n");
+		var stateNode = '#userOnline';
+		console.log(kData.name, "Streams:\n", kData.stream);
+		// TODO: Represent Stream Data
 	};
-	$('#allUser').append("<img class='img-thumbnail img-circle img-responsive' src=" + users.logo + ">\n");
-};
+
+	$(stateNode).append(htmlFace);
+	$('#allUser').append(htmlFace);
+}; // doHTML function
 
 $(document).ready(function() {
 	$( "#tabs" ).tabs();
