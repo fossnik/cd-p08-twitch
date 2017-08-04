@@ -27,11 +27,11 @@ function doAJAX(user) {
 
 function doHTML(kData) {
 	var htmlFace = "<div class='flexbox-item'>";
-				htmlFace += "<a href="+"'"+"//www.twitch.tv/"+kData.name+"'>";
-					htmlFace += "<img class='img-thumbnail img-circle' src=" + "'"+kData.logo+"'" + "</img>";
-					htmlFace += "<button type='button' class='btn btn-primary'>"+kData.name+"</button>";
-				htmlFace += "</a>"
-			htmlFace += "</div>";
+		htmlFace += '<a href="//www.twitch.tv/'+kData.name+'" target="_blank">';
+			htmlFace += "<img class='img-thumbnail img-circle' src=" + "'"+kData.logo+"'" + "</img>";
+			htmlFace += "<button type='button' class='btn btn-primary'>"+kData.name+"</button>";
+		htmlFace += "</a>"
+	htmlFace += "</div>";
 
 	if(kData.stream === null) {
 		var stateNode = '#userOffline';
